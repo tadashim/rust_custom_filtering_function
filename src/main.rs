@@ -1,24 +1,25 @@
-struct Fibonacci {
-    current: u32,
-    next: u32,
+struct CountDown {
+    remaining: i32,
 }
 
-impl Iterator for Fibonacci {
-    type Item = u32;
+impl Iterator for CountDown {
+    type Item = i32;
 
     fn next(&mut self) -> Option<Self::Item> {
-        let current = self.current;
-        self.current = self.next;
-        self.next = current + self.next;
-
-        Some(current)
+        if self.remaining > 0 {
+            let current = self.remaining;
+            self.remaining -= 1;
+            Some(current)
+        } else {
+            None
+        }
     }
 }
 
 fn main() {
-    let mut fib = Fibonacci { current: 0, next: 1 };
+    let countdown = CountDown { remaining: 5 };
 
-    for _ in 0..10 {
-        println!("{}", fib.next().unwrap());
+    for i in countdown {
+        println!("Remaining: {}", i);
     }
 }
