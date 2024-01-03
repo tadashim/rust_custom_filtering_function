@@ -1,12 +1,24 @@
+struct Fibonacci {
+    current: u32,
+    next: u32,
+}
+
+impl Iterator for Fibonacci {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let current = self.current;
+        self.current = self.next;
+        self.next = current + self.next;
+
+        Some(current)
+    }
+}
+
 fn main() {
-    let numbers = vec![1, 2, 3, 4, 5];
+    let mut fib = Fibonacci { current: 0, next: 1 };
 
-    let mut iter = numbers.iter();
-
-    assert_eq!(iter.next(), Some(&1));
-    assert_eq!(iter.next(), Some(&2));
-    assert_eq!(iter.next(), Some(&3));
-    assert_eq!(iter.next(), Some(&4));
-    assert_eq!(iter.next(), Some(&5));
-    assert_eq!(iter.next(), None);
+    for _ in 0..10 {
+        println!("{}", fib.next().unwrap());
+    }
 }
