@@ -1,6 +1,6 @@
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
-    let even_numbers: Vec<i32> = numbers.into_iter().filter(|x| x % 2 == 0).collect();
+    let sum: i32 = numbers.iter().fold(0, |acc, x| acc + x);
 
-    println!("{:?}", even_numbers);
+    println!("The sum of the numbers is: {}", sum);
 }
