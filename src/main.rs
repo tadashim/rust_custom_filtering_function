@@ -1,6 +1,11 @@
 fn main() {
-    let numbers = vec![1, 2, 3, 4, 5];
-    let sum: i32 = numbers.iter().fold(0, |acc, x| acc + x);
-
-    println!("The sum of the numbers is: {}", sum);
+    let words = vec!["apple", "banana", "cherry", "date", "fig"];
+    let result: Vec<_> = words
+        .iter()
+        .enumerate()
+        .filter(|(i, _)| i % 2 == 0)
+        .map(|(i, w)| format!("{}: {}", i + 1, w.to_uppercase()))
+        .collect();
+    
+    println!("Result: {:?}", result);
 }
