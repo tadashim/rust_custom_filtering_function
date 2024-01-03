@@ -1,12 +1,6 @@
-use std::collections::HashMap;
-
 fn main() {
-    let mut scores = HashMap::new();
-    scores.insert(String::from("Alice"), 10);
-    scores.insert(String::from("Bob"), 20);
-    
-    for (key, value) in scores.iter() {
-        println!("{}: {}", key, value);
-    }
-}
+    let numbers = vec![1, 2, 3, 4, 5];
+    let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
 
+    println!("{:?}", doubled);
+}
