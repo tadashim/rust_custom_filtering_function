@@ -1,6 +1,6 @@
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5];
-    let doubled: Vec<i32> = numbers.iter().map(|x| x * 2).collect();
+    let even_numbers: Vec<i32> = numbers.into_iter().filter(|x| x % 2 == 0).collect();
 
-    println!("{:?}", doubled);
+    println!("{:?}", even_numbers);
 }
