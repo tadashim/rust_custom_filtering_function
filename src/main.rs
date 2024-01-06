@@ -1,17 +1,29 @@
-fn main() {
-    fn download_data(url: &str, callback: impl FnOnce(&str)) {
-        println!("Downloading from {}...", url);
+struct FilterCondition<T> {
+    condition: T,
+}
 
-        std::thread::sleep(std::time::Duration::from_secs(1));
-
-        let data = format!("Some data from {}", url);
-
-        callback(&data);
+impl<T: PartialEq> FilterCondition<T> {
+    fn is_match(&self, item: &T) -> bool {
+        self.condition == *item
     }
+}
 
-    let print_data = |data: &str| {
-        println!("Received data: {}", data);
-    };
-    
-    download_data("https://www.rust-lang.org", print_data);
+fn custom_filter<T>(collection: Vec<T>, filter: &FilterCondition<T>) -> Vec<T> 
+where 
+    T: PartialEq,
+{
+    let mut result = Vec::new();
+    for item in collection {
+        if filter.is_match(&item) {
+            result.push(item);
+        }
+    }
+    result
+}
+
+fn main() {
+    let collection = vec![1, 2, 3, 4, 5];
+    let filter_condition = FilterCondition { condition: 2 };
+    let result = custom_filter(collection, &filter_condition);
+    println!("Filtered Collection: {:?}", result);
 }

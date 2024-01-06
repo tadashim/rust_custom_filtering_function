@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "rust_iterators_and_modules"
+name = "rust_custom_filtering_function"
 version = "0.1.0"
