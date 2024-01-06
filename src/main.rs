@@ -1,11 +1,17 @@
 fn main() {
-    let words = vec!["apple", "banana", "cherry", "date", "fig"];
-    let result: Vec<_> = words
-        .iter()
-        .enumerate()
-        .filter(|(i, _)| i % 2 == 0)
-        .map(|(i, w)| format!("{}: {}", i + 1, w.to_uppercase()))
-        .collect();
+    fn download_data(url: &str, callback: impl FnOnce(&str)) {
+        println!("Downloading from {}...", url);
+
+        std::thread::sleep(std::time::Duration::from_secs(1));
+
+        let data = format!("Some data from {}", url);
+
+        callback(&data);
+    }
+
+    let print_data = |data: &str| {
+        println!("Received data: {}", data);
+    };
     
-    println!("Result: {:?}", result);
+    download_data("https://www.rust-lang.org", print_data);
 }
